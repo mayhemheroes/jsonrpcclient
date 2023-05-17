@@ -13,7 +13,7 @@ def RandomString(fdp, min_len, max_len):
 def TestOneInput(data):
     fdp = atheris.FuzzedDataProvider(data)
 
-    json_str = RandomString(fdp, 0, 128)
+    json_str = RandomString(fdp, 0, 4096)
 
     try:
         parse_json(json_str)
