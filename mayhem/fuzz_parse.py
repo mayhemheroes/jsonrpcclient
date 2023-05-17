@@ -1,32 +1,27 @@
 #!/usr/bin/python3
-import json
 import atheris
 import sys
+from json import JSONDecodeError
 
 with atheris.instrument_imports():
-    from jsonrpcclient import parse
+    from jsonrpcclient import parse_json
 
 def RandomString(fdp, min_len, max_len):
     str_len = fdp.ConsumeIntInRange(min_len, max_len)
     return fdp.ConsumeUnicodeNoSurrogates(str_len)
 
-def StringDict(feed_str):
-    try:
-        return json.loads(feed_str)
-    except:
-        return {}
-
 def TestOneInput(data):
     fdp = atheris.FuzzedDataProvider(data)
 
-    json_str = RandomString(fdp, 0, 1000)
-    json_dict = StringDict(json_str)
+    json_str = RandomString(fdp, 0, 128)
 
     try:
-        parse(json_dict)
+        parse_json(json_str)
     except KeyError:
         pass
     except TypeError:
+        pass
+    except JSONDecodeError:
         pass
 
 atheris.Setup(sys.argv, TestOneInput)
