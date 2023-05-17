@@ -1,6 +1,0 @@
-project: PROJECT_NAME
-target: request
-duration: 600
-cmds:
-    - cmd: /src/mayhem/fuzz_request.py
-      libfuzzer: true

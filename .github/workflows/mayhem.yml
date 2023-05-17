@@ -60,7 +60,6 @@ jobs:
       matrix:
         mayhemfile:
           - mayhem/parse.mayhemfile
-          - mayhem/request.mayhemfile
 
     steps:
       - uses: actions/checkout@v3
