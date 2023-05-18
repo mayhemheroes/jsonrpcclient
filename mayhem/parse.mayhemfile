@@ -1,4 +1,4 @@
-project: PROJECT_NAME
+project: jsonrpcclient
 target: parse
 duration: 600
 cmds:
