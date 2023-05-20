@@ -5,17 +5,13 @@ import sys
 with atheris.instrument_imports():
     from jsonrpcclient import parse
 
-def RandomString(fdp, min_len, max_len):
-    str_len = fdp.ConsumeIntInRange(min_len, max_len)
-    return fdp.ConsumeUnicodeNoSurrogates(str_len)
-
 def RandomDict(fdp, key_count, allowed_depth):
     entry_count = fdp.ConsumeIntInRange(0, key_count)
 
     gen_dict = {}
 
     for i in range(entry_count):
-        key = RandomString(fdp, 1, 128)
+        key = fdp.ConsumeUnicodeNoSurrogates(128)
         entry_type = fdp.ConsumeIntInRange(0, 4)
 
         value = None
@@ -29,7 +25,7 @@ def RandomDict(fdp, key_count, allowed_depth):
         elif entry_type == 2:
              value = fdp.ConsumeRegularFloat()
         elif entry_type == 3:
-            value = RandomString(fdp, 0, 128)
+            value = fdp.ConsumeUnicodeNoSurrogates(128)
         elif entry_type == 4:
             value = None
            
