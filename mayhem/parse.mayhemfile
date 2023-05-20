@@ -1,0 +1,6 @@
+project: jsonrpcclient
+target: parse
+duration: 600
+cmds:
+    - cmd: /src/mayhem/fuzz_parse.py
+      libfuzzer: true
